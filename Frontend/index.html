@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script>
+      const e = React.createElement;
+      function App() {
+        const [msg, setMsg] = React.useState('Loading...');
+        React.useEffect(() => {
+          fetch('/api')
+            .then((r) => r.json())
+            .then((d) => setMsg(d.message))
+            .catch(() => setMsg('API error'));
+        }, []);
+        return e('div', null, e('h1', null, 'Frontend'), e('p', null, msg));
+      }
+      ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+    </script>
+  </body>
+  </html>
